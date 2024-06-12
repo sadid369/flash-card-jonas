@@ -43,26 +43,18 @@ export default function App() {
 }
 
 function DisplayCard() {
-  const [selectedId, setSelectedId] = useState(103);
+  const [selectedId, setSelectedId] = useState(null);
   const handleClick = (id) => {
-    setSelectedId(id);
+    setSelectedId(id !== selectedId ? id : null);
   };
 
   return reactQuestionsAndAnswers.map((question) => (
     <div
-      className={
-        selectedId === reactQuestionsAndAnswers.id
-          ? "grid-item-a"
-          : "grid-item-q"
-      }
+      className={selectedId === question.id ? "grid-item-a" : "grid-item-q"}
       onClick={() => handleClick(question.id)}
       key={question.id}
     >
-      <p>
-        {selectedId === reactQuestionsAndAnswers.id
-          ? question.answer
-          : question.question}
-      </p>
+      <p>{question.id === selectedId ? question.answer : question.question}</p>
     </div>
   ));
 }
